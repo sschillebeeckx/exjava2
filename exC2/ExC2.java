@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ExC2 {
@@ -21,17 +22,22 @@ public class ExC2 {
 		boolean priorKnowledgeRequired = true;
 		
 				
-		ArrayList<String> instructors= new ArrayList<>();
+		List<String> instructors= new ArrayList<>();
 		instructors.add("Sandy");
 		instructors.add("Gie");
 		
 		
 		double totalPrice = calculatePrice(numberOfDays, pricePerDay, priorKnowledgeRequired );
 				
-		printInfo(title, numberOfDays, pricePerDay, priorKnowledgeRequired );
-		System.out.println("There are " + instructors.size() + " instructors for this course.");
-		
-		String label;
+		printInfo(title, numberOfDays, pricePerDay, priorKnowledgeRequired,instructors);
+				
+	}
+	
+	public static void printInfo(String title, int numberOfDays, double pricePerDay,boolean priorKnowledgeRequired, List<String> instructors){
+	   double totalPrice = calculatePrice(numberOfDays, pricePerDay, priorKnowledgeRequired );
+	   System.out.println("The " + title + " course takes " + numberOfDays + " days and costs " + totalPrice + " euros. \nPrior knowledge required: " + priorKnowledgeRequired );
+	   System.out.println("There are " + instructors.size() + " instructors for this course.");
+	   String label;
 		if (totalPrice < 500) {
 			label = "CHEAP";
 		} else if (totalPrice >= 500 && totalPrice <=1500) {
@@ -41,13 +47,6 @@ public class ExC2 {
 		}
 		
 		System.out.println("That price is " + label);
-		
-		
-	}
-	
-	public static void printInfo(String title, int numberOfDays, double pricePerDay,boolean priorKnowledgeRequired ){
-	   double totalPrice = calculatePrice(numberOfDays, pricePerDay, priorKnowledgeRequired );
-	   System.out.println("The " + title + " course takes " + numberOfDays + " days and costs " + totalPrice + " euros. \nPrior knowledge required: " + priorKnowledgeRequired );
 	}
 	
 	public static double calculatePrice(int numberOfDays, double pricePerDay,boolean priorKnowledgeRequired ){
