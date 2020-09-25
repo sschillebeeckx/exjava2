@@ -1,51 +1,34 @@
-import java.util.ArrayList;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.io.BufferedReader;
 import java.io.IOException;
 
 public class ExF1 {
-	
-	public static void main (String[] args) {
+
+	public static void main(String[] args) {
+
+		Course co1 = new Course("Java", 2, 300.0, false);
+		co1.addInstructor("Sandy");
+		co1.addInstructor("Gie");
+		Course co2 = new Course("Python", 3, 300.0, true);
+		co2.addInstructor("Arnout");
+		Course co3 = new Course("Cobol", 6, 300.0, false);
+		co2.addInstructor("Peter");
+		co2.addInstructor("Gie");
 		
-	  Path path = Paths.get("instructors.txt");
-	  try (BufferedReader br = Files.newBufferedReader(path)){
 		
-		Course c1 = new Course("Java",3,450.0);
+		co3.setTitle("OOCobol");
 		
-		c1.setPriorKnowledgeRequired(true);
-							
-		String name = null;
-		while ((name=br.readLine())!= null){
-		   c1.addInstructor(name);
+		Course[] courses = { co1, co2, co3 };
+
+		try {
+			for (Course c : courses) {
+				System.out.println(c.getTitle() + " costs " + c.calculatePrice());
+				c.printInfo();
+			}
 		}
-		
-		
-		double totalPrice = c1.calculatePrice();
-				
-		c1.printInfo();
-		
-		c1.printInfo("someotherfile.txt");
-		
-		System.out.println("There are " + c1.getInstructors().size() + " instructors for this course.");
-		
-		String label;
-		if (totalPrice < 500) {
-			label = "CHEAP";
-		} else if (totalPrice >= 500 && totalPrice <=1500) {
-			label = "OK";
-		} else {
-			label = "EXPENSIVE";
+
+		catch (IOException e) {
+			System.out.println(e.getMessage());
 		}
-		
-		System.out.println("That price is " + label);
-		
-	  } catch (IOException ioe){
-		  System.out.println(ioe.getMessage());
-	  }
+
 	}
-	 
-	
-	
+
 }
